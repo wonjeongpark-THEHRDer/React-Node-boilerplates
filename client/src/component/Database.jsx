@@ -3,6 +3,9 @@ import React, { Component } from "react";
 class Database extends Component {
   state = {
   };
+  componentDidMount(){
+    this.serverTest()
+  }
 
   getFetchEX = async (e) => {
     e.preventDefault();
@@ -17,6 +20,14 @@ class Database extends Component {
 
   };
   
+  serverTest(){
+    fetch("/hello")
+            .then(response => {
+              response.json()
+                      .then(res => console.log(res))
+        })
+  }
+
   stateChange = (e) => {
       this.setState({
         [e.target.name]: e.target.value
