@@ -2,16 +2,9 @@ import React, { Component } from "react";
 
 class Database extends Component {
   state = {
-    studentList: [],
-    studentId: "",
-    studentName: "",
-    studentSearchId: "",
   };
 
-  componentDidMount() {
-  }
-
-  studentSearch = async (e) => {
+  getFetchEX = async (e) => {
     e.preventDefault();
     let yearId = this.props.yearId
     let studentSearchId = this.state.studentSearchId
@@ -30,7 +23,7 @@ class Database extends Component {
       });
     }
 
-  studentSubmit = (e) => {
+  postFetchEX = (e) => {
         e.preventDefault();
         const yearId= this.props.yearId
         const insertQuery = '?yearId='+yearId
@@ -58,50 +51,11 @@ class Database extends Component {
     }
 
   render() {
-    const {studentId, studentName, studentSearchId} = this.state;
-    return (
-      
-          <div>
-            <br />
-            <div>추가 : 학번 8자리 숫자 유효성 테스트</div>
-            <br />
-              <div>excel to json n firestore 등록 - 기능완료</div>
-              <form action="/convert" method="post" encType="multipart/form-data">
-                  <input type="file" name="xlsx" />
-                  <input type="submit" />
-              </form>
-              <br />
-              <div>student 등록하기 - 기능완료</div>
-              <form onSubmit={this.studentSubmit} method='post'>
-                <input type="text" value={studentId} name="studentId" placeholder="studentId" onChange={this.stateChange} required/>
-                <input type="text" value={studentName} name="studentName" placeholder="studentName" onChange={this.stateChange} required/>
-                <button className="submitBtn" type="submit">등록</button>
-              </form>
-              <br />
-              <div>student 검색하기 - 기능완료</div>
-              <form onSubmit={this.studentSearch} method='get'>
-              <input type="text" value={studentSearchId} name="studentSearchId" placeholder="studentSearchId" onChange={this.stateChange} required/>
-              <button className="submitBtn" type="submit">검색</button>
-              </form>    
-             <div>
-               {this.state.studentList
-              ? this.state.studentList
-              .map(c => {
-                  return (
-                    <div key={c.studentId}>
-                      <div>{c.college} {c.department} {c.studentName}</div>
-                      <div>{c.studentId} {c.phoneNumber}</div>
-                    </div>
-                  )})
-              : "찾으시는 학생이 없습니다.(등록폼 보이게)"}</div>
-          </div>
+    return (  
+          <h3>fetch example</h3>
     );
   }
 }
 
-
-Database.defaultProps = {
-  yearId: new Date().getFullYear()
-}
 
 export default Database;
